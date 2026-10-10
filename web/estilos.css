@@ -325,3 +325,12 @@ details.texto-modelo summary{cursor:pointer;font-weight:600;padding:.5rem 0;colo
   .callout,.figura,.tabla{break-inside:avoid}
 }
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* ---- logotipo USO · FFC ---- */
+.logo-card{display:block;background:#fff;border-radius:14px;padding:.55rem .8rem;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.logo-card img{display:block;width:100%;height:auto}
+.hero-logo{max-width:270px;margin-bottom:.9rem}
+.menu-logo{margin:calc(env(safe-area-inset-top) + 4px) 1rem .2rem;padding:.5rem .7rem;border:1px solid var(--borde)}
+.pie-logo{max-width:230px;margin:0 auto .9rem}
+.acerca-logo{max-width:320px;margin:.4rem 0 .6rem}
+@media print{.menu-logo{display:none}}

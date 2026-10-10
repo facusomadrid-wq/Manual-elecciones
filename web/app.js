@@ -109,7 +109,7 @@ const FASES = [
 
 function vistaInicio() {
   const ult = store.get('ult', null);
-  let h = `<div class="hero"><small>FAC-USO · edición marzo 2023</small>
+  let h = `<div class="hero"><div class="logo-card hero-logo"><img src="${window.LOGO}" alt="USO Unión Sindical Obrera · FFC Federación Atención a la Ciudadanía"></div><small>FAC-USO · edición marzo 2023</small>
     <h1>Manual de Elecciones Sindicales</h1>
     <p>Sectores privados, personal laboral y funcionario de las Administraciones Públicas. Todo el manual, con buscador, calculadoras y listas de comprobación.</p>
     <form class="hero-busca" id="hb" role="search"><input id="hb-q" type="search" placeholder="Buscar en el manual…" aria-label="Buscar en el manual" enterkeyhint="search"><button type="submit">Buscar</button></form></div>`;
@@ -381,6 +381,7 @@ addEventListener('scroll', alScroll, { passive: true });
 addEventListener('hashchange', () => { ultimaSecAct = ''; mostrar(); });
 
 /* ---------- arranque ---------- */
+$$('img[data-logo]').forEach(i => { i.src = window.LOGO; });
 aplicarAjustes(); construirMenu(); prepararGlosario(); prepararIndice();
 mostrar();
 if ('serviceWorker' in navigator && /^https?:/.test(location.protocol)) navigator.serviceWorker.register('sw.js').catch(() => {});

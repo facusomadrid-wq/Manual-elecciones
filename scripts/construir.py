@@ -345,6 +345,12 @@ def main():
             scripts = f"<script>{datos_js}</script>\n<script>{js_qr}</script>\n<script>{js_tools}</script>\n<script>{js_app}</script>"
         else:
             scripts = '<script src="assets/datos.js"></script>\n<script src="assets/qrcode.js"></script>\n<script src="assets/herramientas.js"></script>\n<script src="assets/app.js"></script>'
+        logo = CONT / "img/logo-uso-ffc.webp"
+        if single:
+            uri = "data:image/webp;base64," + base64.b64encode(logo.read_bytes()).decode()
+        else:
+            uri = "img/logo-uso-ffc.webp"
+        out = out.replace("<!--LOGO-->", f'<script>window.LOGO="{uri}";</script>')
         out = out.replace("<!--SCRIPTS-->", scripts)
         out = out.replace("%VERSION%", VERSION)
         out = out.replace("<!--PWA-->", "" if single else '<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icons/icono-192.png"><link rel="apple-touch-icon" href="icons/icono-192.png">')

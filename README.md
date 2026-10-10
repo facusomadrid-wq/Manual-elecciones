@@ -31,5 +31,5 @@ Dependencias: `pdfplumber markdown-it-py mdit-py-plugins beautifulsoup4 pillow`,
 ## Notas
 - Las tablas de escalas (cap. 3), el flujo del voto por correo (cap. 18) y los formularios (cap. 13 y 16) son imágenes en el PDF: se han transcrito o recortado y se indican en el código con «transcrito de imagen».
 - Los títulos de capítulo usan el índice del manual (en los capítulos 23, 24 y 28 la maquetación impresa abrevia el título).
-- El diseño usa la paleta FAC-USO (rojo `#E71615`, verde `#00A94E`) y Poppins. No se incluye ningún logotipo: añade el oficial en `web/` si se desea.
+- El diseño usa la paleta FAC-USO (rojo `#E71615`, verde `#00A94E`) y Poppins. El logotipo USO · FFC (`contenido/img/logo-uso-ffc.webp`) aparece en portada, menú, «Acerca» y pie.
 - El contenido y la marca del manual son de Unión Sindical Obrera; confirma los permisos de difusión antes de publicarlo abiertamente.
