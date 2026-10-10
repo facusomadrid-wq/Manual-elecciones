@@ -1,0 +1,40 @@
+{
+  "partes": [
+    {"id": 1, "titulo": "Marco y estructura", "lema": "Qué normas aplican y qué órganos se eligen", "caps": [1, 2, 3]},
+    {"id": 2, "titulo": "Antes de las elecciones", "lema": "Quién promueve, cómo se solicita el censo y cuándo se preavisa", "caps": [4, 5, 6, 7, 8, 9, 10]},
+    {"id": 3, "titulo": "Organización del proceso", "lema": "Mesas, interventores, candidaturas, campaña y papeletas", "caps": [11, 12, 13, 14, 15, 16]},
+    {"id": 4, "titulo": "Votación y resultados", "lema": "Votar, contar y levantar acta", "caps": [17, 18, 19, 20, 21]},
+    {"id": 5, "titulo": "Después y garantías", "lema": "Registro, impugnaciones, representatividad y plazos", "caps": [22, 23, 24, 25, 26, 27, 28]}
+  ],
+  "capitulos": {
+    "0":  {"icono": "📖", "resumen": "Por qué importan las elecciones sindicales y para qué sirve este manual."},
+    "1":  {"icono": "📜", "resumen": "Textos legales aplicables: ET, LOLS, LRJS, RD 1844/94, TREBEP y RD 1846/94."},
+    "2":  {"icono": "🗺️", "resumen": "Centro de trabajo, empresa, agrupación de centros y unidades electorales en las Administraciones públicas."},
+    "3":  {"icono": "👥", "resumen": "Delegados y delegadas de personal, comités de empresa, comités intercentros y juntas de personal."},
+    "4":  {"icono": "✍️", "resumen": "Quién puede promover elecciones y presentar preavisos, en la empresa y en la Administración."},
+    "5":  {"icono": "📥", "resumen": "Cómo y a quién pedir el censo de empresas y de personal."},
+    "6":  {"icono": "📣", "resumen": "Casos de promoción: totales, parciales, por nulidad, nueva creación, por las personas trabajadoras o generalizada."},
+    "7":  {"icono": "⏳", "resumen": "Duración de 4 años, causas de extinción y revocación de representantes."},
+    "8":  {"icono": "📨", "resumen": "Plazos, lugar de registro, requisitos, coincidencia y retirada de preavisos."},
+    "9":  {"icono": "🗂️", "resumen": "Qué censo se entrega a la mesa, en qué plazo y con qué datos."},
+    "10": {"icono": "🪪", "resumen": "Quién puede votar y quién puede ser elegido (edad, antigüedad, situación)."},
+    "11": {"icono": "🪑", "resumen": "Constitución, composición y funciones de las mesas; mesas coordinadora, parcial, única e itinerante."},
+    "12": {"icono": "🔎", "resumen": "Nombramiento y funciones de la persona interventora."},
+    "13": {"icono": "📝", "resumen": "Legitimación, listas abiertas y cerradas, presentación, denominación y proclamación (con los Modelos 4 y 8)."},
+    "14": {"icono": "📢", "resumen": "Cuándo y cómo se puede hacer campaña electoral."},
+    "15": {"icono": "🏛️", "resumen": "Reparto de puestos por colegios y cómputo de personas eventuales."},
+    "16": {"icono": "🗳️", "resumen": "Contenido y modelos de papeletas para delegados, comités y juntas."},
+    "17": {"icono": "✅", "resumen": "Lugar, día, hora y reglas de la votación según el tamaño de la plantilla."},
+    "18": {"icono": "✉️", "resumen": "Paso a paso del voto por correo certificado."},
+    "19": {"icono": "🔢", "resumen": "Votos válidos, nulos, en blanco e impugnados."},
+    "20": {"icono": "🧮", "resumen": "Escrutinio, barrera del 5 %, cociente, restos y ejemplos resueltos."},
+    "21": {"icono": "📄", "resumen": "Actas de escrutinio: contenido, registro, publicación, denegación y subsanación."},
+    "22": {"icono": "🏢", "resumen": "Oficinas públicas de registro: clases, funciones y relaciones."},
+    "23": {"icono": "🚢", "resumen": "Sectores con procesos especiales (flota marina mercante y pesquera)."},
+    "24": {"icono": "📈", "resumen": "Seguimiento de los resultados propios y ajenos."},
+    "25": {"icono": "⚖️", "resumen": "Reclamaciones ante la mesa, procedimiento arbitral y recurso ante el Juzgado de lo Social."},
+    "26": {"icono": "🤝", "resumen": "Participación institucional y acreditación de la representatividad."},
+    "27": {"icono": "🔀", "resumen": "Qué pasa con los resultados si cambia la afiliación o hay fusiones."},
+    "28": {"icono": "📅", "resumen": "Calendario de plazos de impugnaciones y reclamaciones."}
+  }
+}

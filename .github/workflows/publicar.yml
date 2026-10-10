@@ -1,0 +1,38 @@
+name: Publicar manual interactivo
+# Cada vez que se edita un capítulo (contenido/*.md) o la web, se regenera y publica en GitHub Pages.
+# Requisito (una sola vez): Ajustes del repositorio -> Pages -> Source: "GitHub Actions".
+on:
+  push:
+    branches: [main]
+    paths: ['contenido/**', 'web/**', 'scripts/construir.py']
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  construir:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - run: pip install markdown-it-py mdit-py-plugins beautifulsoup4
+      - run: node --test web/pruebas/calculadoras.test.js
+      - run: python3 scripts/construir.py
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: docs }
+  publicar:
+    needs: construir
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.despliegue.outputs.page_url }}
+    steps:
+      - id: despliegue
+        uses: actions/deploy-pages@v4
