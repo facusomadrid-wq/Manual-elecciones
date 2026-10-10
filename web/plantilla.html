@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es" data-tema="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Manual de Elecciones Sindicales · FAC-USO</title>
+<meta name="description" content="Manual interactivo de elecciones sindicales (sector privado, personal laboral y funcionario): consulta, buscador, calculadoras de plazos y de resultados.">
+<meta name="theme-color" content="#E71615">
+<!--PWA-->
+<!--CSS-->
+</head>
+<body data-colectivo="todos">
+<a class="saltar" href="#principal">Saltar al contenido</a>
+<div id="progreso" aria-hidden="true"></div>
+
+<header id="barra">
+  <button id="b-menu" class="ib" aria-label="Abrir índice" aria-expanded="false">
+    <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a id="marca" href="#/" aria-label="Inicio">
+    <span class="marca-fac">FAC-USO</span>
+    <span class="marca-t">Manual de Elecciones Sindicales</span>
+  </a>
+  <div class="barra-acc">
+    <button id="b-buscar" class="ib" aria-label="Buscar"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="2" fill="none"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    <button id="b-ajustes" class="ib" aria-label="Ajustes de lectura" aria-expanded="false"><span class="aa">Aa</span></button>
+  </div>
+</header>
+
+<div id="ajustes" class="panel-aj" hidden>
+  <div class="fila"><span>Tamaño de letra</span>
+    <div class="grupo"><button id="a-menos" aria-label="Reducir letra">A−</button><button id="a-mas" aria-label="Aumentar letra">A+</button></div></div>
+  <div class="fila"><span>Tema</span>
+    <div class="grupo" role="group" aria-label="Tema">
+      <button data-tema="auto">Auto</button><button data-tema="claro">Claro</button><button data-tema="oscuro">Oscuro</button></div></div>
+  <div class="fila"><span>Mi colectivo</span>
+    <div class="grupo col" role="group" aria-label="Colectivo">
+      <button data-col="todos">Todos</button><button data-col="priv">Empresa y laboral</button><button data-col="pub">Funcionariado</button></div></div>
+  <p class="nota-aj">El filtro de colectivo es orientativo: oculta los apartados marcados expresamente para el otro colectivo.</p>
+</div>
+
+<div id="velo" hidden></div>
+<nav id="menu" aria-label="Índice del manual"><a class="logo-card menu-logo" href="#/" aria-label="Inicio"><img data-logo alt="USO Unión Sindical Obrera · FFC Federación Atención a la Ciudadanía"></a><div id="menu-int"></div></nav>
+
+<main id="principal" tabindex="-1">
+  <div id="aviso-filtro" class="aviso-filtro" hidden></div>
+  <section class="vista" id="v-inicio" hidden></section>
+  <section class="vista" id="v-indice" hidden></section>
+  <section class="vista" id="v-herramientas" hidden></section>
+  <section class="vista" id="v-buscar" hidden></section>
+  <section class="vista" id="v-favoritos" hidden></section>
+  <section class="vista" id="v-glosario" hidden></section>
+  <section class="vista" id="v-acerca" hidden>
+    <div class="logo-card acerca-logo"><img data-logo alt="USO Unión Sindical Obrera · FFC Federación Atención a la Ciudadanía"></div>
+    <div class="vista-cab"><h1>Acerca del manual</h1></div>
+    <div class="caja creditos"><!--CREDITOS--></div>
+    <div id="acerca-extra"></div>
+  </section>
+  <div id="v-capitulos">
+<!--CAPITULOS-->
+  </div>
+  <footer class="pie">
+    <div class="logo-card pie-logo"><img data-logo alt="USO Unión Sindical Obrera · FFC Federación Atención a la Ciudadanía"></div>
+    <p><strong>Manual de Elecciones Sindicales</strong> · edición de marzo de 2023 de Unión Sindical Obrera.</p>
+    <p>Versión interactiva FAC-USO %VERSION%. Contenido íntegro del manual impreso; las calculadoras son orientativas.</p>
+  </footer>
+</main>
+
+<nav id="tabs" aria-label="Navegación principal">
+  <a href="#/" data-tab="inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span>Inicio</span></a>
+  <a href="#/indice" data-tab="indice"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6h14M5 12h14M5 18h9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg><span>Índice</span></a>
+  <a href="#/buscar" data-tab="buscar"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Buscar</span></a>
+  <a href="#/herramientas" data-tab="herramientas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6.5a4 4 0 0 0-5 5L4 17l3 3 5.5-5.5a4 4 0 0 0 5-5l-2.5 2.5-2.5-.5-.5-2.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span>Herramientas</span></a>
+  <a href="#/favoritos" data-tab="favoritos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l2.4 5 5.4.7-4 3.8 1 5.4L12 16.3 7.2 18.9l1-5.4-4-3.8 5.4-.7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg><span>Favoritos</span></a>
+</nav>
+
+<div id="sheet" class="sheet" hidden role="dialog" aria-modal="true"><div class="sheet-int"><button class="sheet-x" aria-label="Cerrar">×</button><div id="sheet-c"></div></div></div>
+<div id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Imagen ampliada">
+  <div class="lb-barra"><button id="lb-menos" aria-label="Alejar">−</button><button id="lb-mas" aria-label="Acercar">+</button><button id="lb-x" aria-label="Cerrar">×</button></div>
+  <div class="lb-lienzo"><img alt=""></div>
+</div>
+<div id="toast" role="status" aria-live="polite" hidden></div>
+
+<noscript><p style="padding:1rem">Este manual interactivo necesita JavaScript. Puedes consultar el PDF original del manual.</p></noscript>
+<!--LOGO-->
+<!--SCRIPTS-->
+</body>
+</html>

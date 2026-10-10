@@ -1,0 +1,57 @@
+[
+  {"id": "promotor", "titulo": "Promotor o promotora", "icono": "📣", "desc": "Antes de registrar el preaviso.",
+   "items": [
+    {"t": "Comprobar que el sindicato (o el grupo de personas trabajadoras) tiene capacidad legal para promover elecciones.", "ref": "4.1"},
+    {"t": "Solicitar el censo o los datos de empresas / unidades electorales afectadas.", "ref": "5.1"},
+    {"t": "Comprobar que faltan 3 meses o menos para el vencimiento del mandato (si es renovación).", "ref": "6.5"},
+    {"t": "Consultar si otros sindicatos han presentado preavisos en la misma empresa o unidad (coincidencia).", "ref": "8.4"},
+    {"t": "Cumplimentar el preaviso en el impreso oficial, con la empresa y centro (o la unidad electoral) y la fecha de constitución de la mesa.", "ref": "8.3"},
+    {"t": "Revisar el preaviso antes de presentarlo: cualquier incumplimiento anula el proceso.", "ref": "8.3"},
+    {"t": "Firma de un representante legal del sindicato con poder notarial.", "ref": "8.3"},
+    {"t": "Registrarlo en la Oficina Pública con 1 mes como mínimo y 3 meses como máximo de antelación al inicio.", "ref": "8.1"},
+    {"t": "Comunicarlo a la empresa o al órgano de personal, con copia del preaviso registrado.", "ref": "8.2"},
+    {"t": "Si promueven las personas trabajadoras: acta de la reunión con acuerdo mayoritario, adjunta al preaviso.", "ref": "6.8"},
+    {"t": "Vigilar cada día los preavisos que presenten otros sindicatos.", "ref": "8.2"}
+  ]},
+  {"id": "mesa", "titulo": "Miembro de la mesa electoral", "icono": "🪑", "desc": "Desde la constitución hasta el registro del acta.",
+   "items": [
+    {"t": "Constituir la mesa en la fecha del preaviso y levantar acta de su composición.", "ref": "11.1"},
+    {"t": "Comprobar la composición: presidencia (más antigüedad), vocalía (más edad) y secretaría (menos edad).", "ref": "11.2"},
+    {"t": "Hacer público el censo en el tablón al menos 72 horas.", "ref": "9.2"},
+    {"t": "Determinar quién es persona electora y quién elegible según el censo.", "ref": "10.2"},
+    {"t": "Fijar el número de representantes a elegir (y por colegio, en su caso).", "ref": "11.3"},
+    {"t": "Elaborar el calendario electoral y comunicar la fecha de votación a la empresa en 24 horas.", "ref": "17.2"},
+    {"t": "Recibir las candidaturas y proclamarlas respetando los plazos.", "ref": "13.9"},
+    {"t": "Resolver las reclamaciones: se presentan el día laborable siguiente y se resuelven el posterior día hábil.", "ref": "25.1"},
+    {"t": "Presidir la votación, custodiar la urna y atender el voto por correo.", "ref": "17.8"},
+    {"t": "Hacer el escrutinio público y proclamar a las personas elegidas.", "ref": "20.1"},
+    {"t": "Levantar el acta y presentarla con las papeletas nulas o impugnadas en la Oficina Pública en 3 días.", "ref": "21.3"},
+    {"t": "Publicar el resultado en el tablón en las 24 horas siguientes a la redacción del acta.", "ref": "21.4"}
+  ]},
+  {"id": "interventor", "titulo": "Interventor o interventora", "icono": "🔎", "desc": "Vigilancia del proceso y del escrutinio.",
+   "items": [
+    {"t": "Ser nombrado de forma inmediata a la constitución de la mesa.", "ref": "12.1"},
+    {"t": "Comprobar que la mesa está bien compuesta; si no, exigir su nueva constitución o impugnarla en 24 horas.", "ref": "11.2"},
+    {"t": "Revisar a fondo el censo publicado.", "ref": "9.2"},
+    {"t": "Vigilar las decisiones de la mesa y comunicar por escrito y por duplicado cualquier anomalía.", "ref": "12.2"},
+    {"t": "Comprobar que las solicitudes de voto por correo cumplen todos los requisitos.", "ref": "18"},
+    {"t": "Seguir la votación: listado de votantes y custodia de la urna.", "ref": "12.2"},
+    {"t": "Impugnar en el acto los votos dudosos durante el escrutinio.", "ref": "19.4"},
+    {"t": "Comprobar la atribución de votos y de delegados antes de firmar el acta.", "ref": "21.2"},
+    {"t": "Hacer fotocopia del acta para comprobar que no se manipula hasta su registro.", "ref": "21.3"}
+  ]},
+  {"id": "candidatura", "titulo": "Responsable de la candidatura", "icono": "📝", "desc": "Preparación, presentación y campaña.",
+   "items": [
+    {"t": "Candidatura firmada por un representante legal del sindicato con poder notarial.", "ref": "13.8"},
+    {"t": "Denominación electoral exacta acordada (UNIÓN SINDICAL OBRERA (USO) salvo convergencia).", "ref": "13.7"},
+    {"t": "Delegados de personal: tantos candidatos y candidatas como puestos a cubrir.", "ref": "13.2"},
+    {"t": "Comités y juntas: al menos tantos nombres como puestos; mantener como mínimo el 60 % si hay renuncias.", "ref": "13.3"},
+    {"t": "Usar los impresos oficiales y la firma de aceptación de cada candidato o candidata.", "ref": "13.4"},
+    {"t": "Presentarla con original y copia para que la presidencia certifique fecha y hora.", "ref": "13.3"},
+    {"t": "No usar firma electrónica en la candidatura.", "ref": "13.3"},
+    {"t": "Si es de un grupo de personas: firmas de al menos el triple de los puestos a cubrir.", "ref": "13.5"},
+    {"t": "No hacer propaganda antes de la proclamación definitiva.", "ref": "14.1"},
+    {"t": "Ordenar bien la lista cerrada: resultan elegidos por el orden en que figuran.", "ref": "16.2"},
+    {"t": "Comprobar que las papeletas oficiales tienen el orden y siglas correctos.", "ref": "16.2"}
+  ]}
+]
