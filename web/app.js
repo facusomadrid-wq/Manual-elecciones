@@ -384,5 +384,21 @@ addEventListener('hashchange', () => { ultimaSecAct = ''; mostrar(); });
 $$('img[data-logo]').forEach(i => { i.src = window.LOGO; });
 aplicarAjustes(); construirMenu(); prepararGlosario(); prepararIndice();
 mostrar();
-if ('serviceWorker' in navigator && /^https?:/.test(location.protocol)) navigator.serviceWorker.register('sw.js').catch(() => {});
+if ('serviceWorker' in navigator && /^https?:/.test(location.protocol)) {
+  // Si ya había una versión instalada y entra otra, se avisa: la página abierta sigue siendo la antigua hasta recargar.
+  const habia = !!navigator.serviceWorker.controller;
+  navigator.serviceWorker.addEventListener('controllerchange', () => { if (habia) avisarVersionNueva(); });
+  navigator.serviceWorker.register('sw.js').then(reg => {
+    reg.update().catch(() => {});
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) reg.update().catch(() => {}); });
+  }).catch(() => {});
+}
+function avisarVersionNueva() {
+  if ($('#aviso-version')) return;
+  const b = document.createElement('button');
+  b.id = 'aviso-version'; b.type = 'button'; b.className = 'aviso-version';
+  b.textContent = 'Hay una versión nueva. Toca para actualizar';
+  b.onclick = () => location.reload();
+  document.body.appendChild(b);
+}
 })();

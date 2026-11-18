@@ -8,6 +8,7 @@ Salida:
 Uso:  python3 scripts/construir.py
 """
 import base64
+import hashlib
 import json
 import re
 import shutil
@@ -22,7 +23,7 @@ RAIZ = Path(__file__).resolve().parent.parent
 CONT = RAIZ / "contenido"
 WEB = RAIZ / "web"
 DOCS = RAIZ / "docs"
-VERSION = "1.0.0"
+VERSION = "1.1.0"  # versión visible. La caché de la app instalada NO depende de ella, sino de huella_publicada()
 
 # --------------------------------------------------------------------------- utilidades
 SIGLAS = {
@@ -249,6 +250,22 @@ def texto_plano(html):
     return re.sub(r"\s+", " ", s.get_text(" ", strip=True))
 
 
+def huella_publicada(carpeta, plantilla_sw):
+    """Huella (SHA-256 abreviado) de todo lo publicado menos sw.js, más la plantilla del propio sw.js.
+
+    Va en el nombre de la caché del service worker: si cambia un solo byte de la web, cambia sw.js y quien ya
+    tenía la app instalada descarga la versión nueva. Si no cambia nada, la huella es la misma (construir dos
+    veces da el mismo resultado).
+    """
+    h = hashlib.sha256()
+    h.update(plantilla_sw.encode("utf-8"))
+    rutas = sorted(p.relative_to(carpeta).as_posix() for p in carpeta.rglob("*") if p.is_file() and p.name != "sw.js")
+    for ruta in rutas:  # mismo orden y mismo cálculo que web/pruebas/cache.test.js
+        h.update(ruta.encode("utf-8") + b"\0")
+        h.update(hashlib.sha256((carpeta / ruta).read_bytes()).digest())
+    return h.hexdigest()[:12]
+
+
 # --------------------------------------------------------------------------- construcción
 def main():
     meta = json.loads((WEB / "datos/capitulos.json").read_text(encoding="utf-8"))
@@ -377,8 +394,6 @@ def main():
     for p in (WEB / "icons").glob("*.png"):
         shutil.copy(p, DOCS / "icons" / p.name)
     shutil.copy(WEB / "manifest.webmanifest", DOCS / "manifest.webmanifest")
-    sw = (WEB / "sw.js").read_text(encoding="utf-8").replace("%VERSION%", VERSION)
-    (DOCS / "sw.js").write_text(sw, encoding="utf-8")
     (DOCS / ".nojekyll").write_text("", encoding="utf-8")
     pdf = RAIZ / "sindicato-uso-manual-electoral-2022-2026-w.pdf"
     if pdf.exists():
@@ -388,7 +403,13 @@ def main():
     html_single, _, _ = montar(True)
     (DOCS / "manual-elecciones-facuso.html").write_text(html_single, encoding="utf-8")
 
+    # --- service worker: el último, porque su caché lleva la huella de todo lo anterior
+    plantilla_sw = (WEB / "sw.js").read_text(encoding="utf-8")
+    huella = huella_publicada(DOCS, plantilla_sw)
+    (DOCS / "sw.js").write_text(plantilla_sw.replace("%VERSION%", VERSION).replace("%HUELLA%", huella), encoding="utf-8")
+
     print(f"Capítulos: {len(capitulos)} · secciones indexadas: {len(indice)}")
+    print(f"Versión {VERSION} · huella de la caché: {huella}")
     print(f"docs/index.html {len(html_web)//1024} KB · versión 1 archivo {len(html_single)//1024} KB")
 
 

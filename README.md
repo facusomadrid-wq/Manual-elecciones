@@ -12,7 +12,7 @@ Versión web, móvil y sin conexión del **Manual de Elecciones Sindicales** de 
 - 29 apartados (introducción, 27 capítulos y anexo) con numeración idéntica a la del manual; recuadros *Importante / Comentario / Ejemplo*, citas legales destacadas, tablas adaptadas al móvil y los modelos oficiales (Modelo 4, Modelo 8 y papeletas) como imágenes ampliables.
 - Buscador sin tildes, índice por partes, filtro por colectivo (empresa y personal laboral / funcionariado), modo oscuro, tamaño de letra, glosario que se abre al tocar siglas y términos, favoritos y notas personales (solo en tu dispositivo).
 - **Herramientas** (`#/herramientas`): ¿qué órgano me corresponde?, plantilla con eventuales, reparto por colegios, atribución de resultados (cociente y restos / listas abiertas), plazos y calendario (preaviso, votación, Anexo I) con exportación a `.ics` y Google Calendar, línea de tiempo, listas de comprobación por rol, guía rápida de votos y generador de código QR.
-- Las calculadoras están probadas con los ejemplos resueltos del propio manual (`node --test web/pruebas/`).
+- Las calculadoras están probadas con los ejemplos resueltos del propio manual (`node --test web/pruebas/calculadoras.test.js`; en Node 22 hay que indicar el archivo: con solo la carpeta, `node --test web/pruebas/` falla).
 
 > Las herramientas son **orientativas**: no sustituyen al texto legal ni al asesoramiento de la Oficina Electoral. El contenido refleja la edición de 2023 del manual.
 
@@ -20,6 +20,7 @@ Versión web, móvil y sin conexión del **Manual de Elecciones Sindicales** de 
 1. Edita el capítulo en `contenido/NN.md` (por ejemplo desde GitHub, con el lápiz ✏️).
 2. Sintaxis especial: `::: importante … :::` (también `comentario`, `ejemplo`, `nota`, `pasos`), `[[(Art. 67.1 E.T.)]]` para citas legales, `{{texto}}` para texto en rojo, tablas con `|`.
 3. Con GitHub Actions (`.github/workflows/publicar.yml`) la web se regenera sola al subir cambios a `main`. A mano: `python3 scripts/construir.py`.
+4. **Quien ya tiene la app instalada recibe los cambios sola.** `construir.py` pone en el nombre de la caché (`docs/sw.js`) una huella de todo lo publicado: si cambia cualquier archivo, el móvil descarga la versión nueva y muestra «Hay una versión nueva. Toca para actualizar». No hay que subir ningún número a mano (`VERSION` es solo la versión que se ve en «Acerca»). Tras construir, `node --test web/pruebas/cache.test.js` comprueba que `docs/` y su huella coinciden.
 
 ## Cómo se generó (reproducible)
 ```
