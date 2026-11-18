@@ -30,20 +30,27 @@ const Calc = {
       r.notas.push('Se presentan tantos candidatos y candidatas como puestos a cubrir (lista abierta).');
     } else {
       r.tipo = aapp ? 'junta' : 'comite'; r.lista = 'cerradas'; r.miembros = Calc.miembros(n); r.ref = aapp ? ['3.4', '13.3', '11.2'] : ['3.2', '13.3', '15.1'];
-      r.mesas = Math.ceil(n / 250);
+      // Juntas: una mesa por cada 250 o fracción. Comités: las mesas son por colegio (art. 73.1 ET) y dependen del reparto
+      // de la plantilla entre colegios, que aquí no se conoce: se calculan en «Reparto de puestos por colegios».
+      r.mesas = aapp ? Math.ceil(n / 250) : 0;
       r.notas.push(aapp ? 'En las unidades electorales de 50 o más funcionarios y funcionarias: junta de personal (listas cerradas).' : 'Con 50 o más personas: comité de empresa (listas cerradas) y dos colegios electorales (técnicos y administrativos / especialistas y no cualificados).');
       r.notas.push(`Cada candidatura debe presentar al menos tantos nombres como puestos (${r.miembros}); si hay renuncias, debe conservar como mínimo el 60 % (${Math.ceil(r.miembros * 0.6)}).`);
-      r.notas.push(aapp ? 'Una mesa por cada 250 funcionarios o fracción, salvo que los sindicatos acuerden otra distribución.' : 'Una mesa por cada colegio de 250 personas o fracción.');
+      r.notas.push(aapp ? 'Una mesa por cada 250 funcionarios o fracción, salvo que los sindicatos acuerden otra distribución.' : 'Las mesas son por colegio: en cada colegio, una mesa por cada 250 personas o fracción (art. 73.1 ET). El número total depende de cómo se reparta la plantilla entre los colegios: calcúlalo en «Reparto de puestos por colegios».');
       if (n > 1000) r.notas.push('A partir de 1.001 personas: 2 miembros más por cada 1.000 o fracción, con un máximo de 75.');
       if (n >= 50 && n < 60) r.notas.push('Cuenta también al personal eventual (ver «Plantilla con eventuales»).');
     }
     return r;
   },
-  /** Plantilla con personal eventual (cap. 15.4). */
+  /** Plantilla con personal eventual (cap. 15.4).
+      Art. 72.2.b ET: «cada doscientos días trabajados o fracción se computará como un trabajador más» (se redondea hacia arriba).
+      Art. 9.4 RD 1844/1994: como máximo, el número de personas eventuales que prestan servicio al iniciarse el proceso
+      (el tope solo se aplica si se indica ese número). `equiv` es el cociente exacto; `computados`, las personas que cuentan. */
   plantilla(fijos, mayor1anio, diasMenos1anio, presentesMenos1anio) {
     const equiv = diasMenos1anio / 200;
-    const tope = presentesMenos1anio > 0 ? Math.min(equiv, presentesMenos1anio) : equiv;
-    return { equiv, aplicadoTope: presentesMenos1anio > 0 && equiv > presentesMenos1anio, computados: tope, total: fijos + mayor1anio + tope };
+    const enteros = Math.ceil(equiv);
+    const aplicadoTope = presentesMenos1anio > 0 && enteros > presentesMenos1anio;
+    const computados = aplicadoTope ? presentesMenos1anio : enteros;
+    return { equiv, aplicadoTope, computados, total: fijos + mayor1anio + computados };
   },
   /** Reparto de puestos entre dos colegios (cap. 15.3): cociente + mayor fracción. */
   colegios(nEsp, nTec) {
@@ -53,7 +60,7 @@ const Calc = {
     const col = [{ k: 'Especialistas y no cualificados', n: nEsp }, { k: 'Técnicos y administrativos', n: nTec }];
     col.forEach(c => { c.num = c.n * M; c.cociente = c.num / N; c.ent = Math.floor(c.num / N); c.resto = c.num % N; });
     r.unico = col.some(c => c.num * 2 < N); // cociente < 0,5
-    if (r.unico) { r.filas = [{ k: 'Colegio único', n: N, cociente: M, escanos: M }]; return r; }
+    if (r.unico) { r.filas = [{ k: 'Colegio único', n: N, cociente: M, escanos: M }]; r.mesas = [Math.ceil(N / 250)]; return r; }
     let sobran = M - col[0].ent - col[1].ent;
     const orden = col.slice().sort((a, b) => b.resto - a.resto);
     col.forEach(c => { c.escanos = c.ent; });
@@ -165,11 +172,11 @@ def('plantilla', '🧾', 'Plantilla con eventuales', 'Calcula el censo a efectos
   el.innerHTML = `<div class="form"><div class="campo"><label for="p-a">Personas trabajadoras fijas</label><input id="p-a" type="number" inputmode="numeric" min="0" placeholder="0"></div>
   <div class="campo"><label for="p-b">Fijas discontinuas o con contrato superior a un año</label><input id="p-b" type="number" inputmode="numeric" min="0" placeholder="0"></div>
   <div class="campo"><label for="p-c">Días trabajados en el último año por quienes tienen contrato inferior a un año</label><input id="p-c" type="number" inputmode="numeric" min="0" placeholder="0"><small>Se suman los días efectivamente trabajados y los de descanso (semanal, festivos y vacaciones), de personas que a la votación lleven al menos 1 mes trabajando.</small></div>
-  <div class="campo"><label for="p-d">Personas con contrato inferior a un año que prestan servicio en la fecha de inicio del proceso (opcional)</label><input id="p-d" type="number" inputmode="numeric" min="0" placeholder="0"><small>Si el cociente de días ÷ 200 supera este número, se toma como máximo este número.</small></div></div><div id="p-r"></div>
-  <p style="font-size:.85rem">Regla del manual: contratos fijos 1 × 1; fijos discontinuos o de más de un año 1 × 1; contratos de menos de un año: 1 por cada 200 días trabajados. Ver ${enlaces(['15.4'])}.</p>${AVISO}`;
+  <div class="campo"><label for="p-d">Personas con contrato inferior a un año que prestan servicio en la fecha de inicio del proceso (opcional)</label><input id="p-d" type="number" inputmode="numeric" min="0" placeholder="0"><small>Si el resultado de días ÷ 200 supera este número, se toma como máximo este número (art. 9.4 RD 1844/1994).</small></div></div><div id="p-r"></div>
+  <p style="font-size:.85rem">Regla del manual: contratos fijos 1 × 1; fijos discontinuos o de más de un año 1 × 1; contratos de menos de un año: 1 por cada 200 días trabajados o fracción (art. 72.2.b ET), sin superar el número de personas eventuales (art. 9.4 RD 1844/1994). Ver ${enlaces(['15.4'])}.</p>${AVISO}`;
   el.addEventListener('input', () => {
     const r = Calc.plantilla(num($('#p-a', el)), num($('#p-b', el)), num($('#p-c', el)), num($('#p-d', el)));
-    $('#p-r', el).innerHTML = `<div class="resultado"><h3>Plantilla a efectos de representantes</h3><div class="grande">${(Math.round(r.total * 100) / 100).toLocaleString('es-ES')}</div><ul><li>Personas por contratos de menos de un año: ${(Math.round(r.computados * 100) / 100).toLocaleString('es-ES')} (${num($('#p-c', el)).toLocaleString('es-ES')} días ÷ 200${r.aplicadoTope ? '; aplicado el tope de personas presentes' : ''}).</li><li>El manual no fija un criterio de redondeo: aplica el que acuerde la mesa o establezca la normativa.</li><li>Ejemplo del manual: 100 + 40 + 24.000 ÷ 200 = 260.</li></ul></div>`;
+    $('#p-r', el).innerHTML = `<div class="resultado"><h3>Plantilla a efectos de representantes</h3><div class="grande">${r.total.toLocaleString('es-ES')}</div><ul><li>Personas por contratos de menos de un año: ${r.computados.toLocaleString('es-ES')} (${num($('#p-c', el)).toLocaleString('es-ES')} días ÷ 200 = ${(Math.round(r.equiv * 100) / 100).toLocaleString('es-ES')}${Number.isInteger(r.equiv) ? '' : ', redondeado hacia arriba'}${r.aplicadoTope ? '; aplicado el tope de personas presentes' : ''}).</li><li>Cada 200 días trabajados <strong>o fracción</strong> cuentan como una persona más (art. 72.2.b ET). Ejemplo: 49 fijas + 150 días de eventuales = 50, y ya corresponde comité.</li><li>Ejemplo del manual: 100 + 40 + 24.000 ÷ 200 = 260.</li></ul></div>`;
   });
 });
 
@@ -181,7 +188,7 @@ def('colegios', '🏛️', 'Reparto de puestos por colegios', 'Cuántos represen
     const e = num($('#c-e', el)), t = num($('#c-t', el)), out = $('#c-r', el); if (!e && !t) { out.innerHTML = ''; return; }
     const r = Calc.colegios(e, t);
     if (r.N < 50) { out.innerHTML = '<div class="resultado"><h3>Menos de 50 personas</h3><p>No se constituye comité de empresa: ver «¿Qué órgano me corresponde?».</p></div>'; return; }
-    if (r.unico) { out.innerHTML = `<div class="resultado"><h3>Colegio único</h3><p>A uno de los colegios le corresponde menos de 0,5: se constituye un solo colegio electoral con ${r.M} miembros.</p></div>`; return; }
+    if (r.unico) { out.innerHTML = `<div class="resultado"><h3>Colegio único</h3><p>A uno de los colegios le corresponde menos de 0,5: se constituye un solo colegio electoral con ${r.M} miembros y ${r.mesas[0]} mesa${r.mesas[0] > 1 ? 's' : ''} (una por cada 250 personas o fracción).</p></div>`; return; }
     out.innerHTML = `<div class="resultado"><h3>Comité de ${r.M} miembros · plantilla ${r.N}</h3><div class="res-scroll"><table class="tabla-res"><thead><tr><th>Colegio</th><th>Cociente</th><th>Puestos</th><th>Mesas</th></tr></thead><tbody>${r.filas.map((c, i) => `<tr><td>${esc(c.k)} (${c.n})</td><td>${(c.num / r.N).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td><td class="ok">${r.empate ? c.ent + (c.resto === r.filas[1 - i].resto ? ' (+1 por sorteo)' : '') : c.escanos}</td><td>${r.mesas[i]}</td></tr>`).join('')}</tbody></table></div>${r.empate ? '<p class="aviso">Las fracciones son iguales: la unidad restante se adjudica por sorteo.</p>' : ''}</div>`;
   });
 });
