@@ -304,6 +304,7 @@ details.texto-modelo summary{cursor:pointer;font-weight:600;padding:.5rem 0;colo
 .lb-barra button{width:46px;height:46px;border-radius:50%;border:0;background:#333;color:#fff;font-size:1.5rem}
 .lb-lienzo{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y pinch-zoom;text-align:center}
 .lb-lienzo img{width:100%;max-width:none;background:#fff;display:inline-block;vertical-align:top}
+.aviso-version{position:fixed;left:50%;width:max-content;transform:translateX(-50%);bottom:calc(var(--tabs-h) + env(safe-area-inset-bottom) + 16px);z-index:60;min-height:44px;max-width:calc(100vw - 32px);border:0;border-radius:99px;padding:.6rem 1.1rem;background:var(--verde);color:#fff;font:inherit;font-size:.85rem;font-weight:600;box-shadow:0 4px 16px rgba(0,0,0,.3);cursor:pointer}
 #toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--tabs-h) + env(safe-area-inset-bottom) + 16px);background:#191919;color:#fff;padding:.6rem 1.1rem;border-radius:99px;font-size:.85rem;z-index:120;box-shadow:0 6px 20px rgba(0,0,0,.35);max-width:90vw}
 .pie{max-width:var(--lectura);margin:1rem auto 0;padding:1.2rem 1rem;color:var(--txt2);font-size:.75rem;text-align:center;line-height:1.5}
 .pie p{margin:.2rem 0}
