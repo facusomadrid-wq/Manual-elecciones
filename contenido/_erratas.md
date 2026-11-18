@@ -22,3 +22,8 @@ Solo se corrigen faltas de ortografía evidentes; el contenido jurídico no se t
 - Cap. 20: «candaidtas» → «candidatas» (1)
 - Cap. 20: «intiuitiva» → «intuitiva» (1)
 - Cap. 20: «alcande» → «alcance» (1)
+
+## Precisiones añadidas por FAC-USO Madrid (no son erratas del PDF)
+
+- Cap. 15 (15.4), 18/11/2026: «1 x 200 días de trabajo» → «1 x 200 días de trabajo o fracción», como dice el art. 72.2.b del Estatuto de los Trabajadores.
+- Cap. 02, 18/11/2026: dos notas de actualización sobre el Acuerdo de 16/12/2020 (derogado por el de 18/06/2025). El texto del manual no se ha tocado.
